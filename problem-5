@@ -1,0 +1,44 @@
+def determine_season():
+    # Define month name order for checking
+    months_31 = ['Jan', 'Mar', 'May', 'Jul', 'Aug', 'Oct', 'Dec']
+    months_30 = ['Apr', 'Jun', 'Sep', 'Nov']
+    feb = 'Feb'
+    all_months = months_31 + months_30 + [feb]
+
+    # Prompt for input
+    month = input("Enter the month of the year (Jan - Dec): ").strip().title()
+    try:
+        day = int(input("Enter the day of the month: "))
+    except ValueError:
+        print("Invalid input. Please enter a number for the day.")
+        return
+
+    # Validate month and day
+    if month not in all_months:
+        print("Invalid month. Please enter a valid three-letter month (e.g., Jan, Feb).")
+        return
+    if day < 1 or (
+        (month in months_31 and day > 31) or
+        (month in months_30 and day > 30) or
+        (month == feb and day > 29)  # Accept up to 29 for leap year leniency
+    ):
+        print("Invalid day for the given month.")
+        return
+
+    # Determine season
+    if (month == 'Dec' and day >= 21) or (month in ['Jan', 'Feb']) or (month == 'Mar' and day <= 19):
+        season = "Winter"
+    elif (month == 'Mar' and day >= 20) or (month in ['Apr', 'May']) or (month == 'Jun' and day <= 20):
+        season = "Spring"
+    elif (month == 'Jun' and day >= 21) or (month in ['Jul', 'Aug']) or (month == 'Sep' and day <= 21):
+        season = "Summer"
+    elif (month == 'Sep' and day >= 22) or (month in ['Oct', 'Nov']) or (month == 'Dec' and day <= 20):
+        season = "Fall"
+    else:
+        season = "Unknown"
+
+    # Output result
+    print(f"{month} {day} is in {season}.")
+
+# Call the function
+determine_season()

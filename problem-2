@@ -1,0 +1,19 @@
+def check_voting_eligibility():
+    try:
+        age = int(input("Please enter your age: "))
+
+        if age < 0:
+            print("Age cannot be negative. Please enter a valid age.")
+            return
+
+        voting_age = 18
+
+        if age >= voting_age:
+            print("You are eligible to vote.")
+        else:
+            print("You are not eligible to vote yet.")
+    except ValueError:
+        print("Invalid input. Please enter a valid number for age.")
+
+# Call the function
+check_voting_eligibility()
